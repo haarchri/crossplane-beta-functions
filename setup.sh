@@ -15,7 +15,7 @@ kubectl -n crossplane-system wait deploy crossplane --for condition=Available --
 kubectl -n crossplane-system wait pods -l app=crossplane,patched=true --for condition=Ready --timeout=60s
 
 # need to use crank from https://github.com/crossplane/crossplane/pull/4694
-./crank xpkg build --ignore="init/*.yaml,kind-config.yaml,.up/examples/spoke-cluster.yaml" --output=test.xpkg
+./crank xpkg build --ignore="init/*.yaml,kind-config.yaml,.up/examples/spoke-cluster.yaml,.up/examples/xeks-spoke-cluster.yaml,.up/examples/xnetwork-spoke-cluster.yaml,.up/examples/xservices-spoke-cluster.yaml" --output=test.xpkg
 # up xpkg build --ignore="init/*.yaml,kind-config.yaml" --output=test.xpkg
 up xpkg xp-extract --from-xpkg test.xpkg -o ./test.gz
 
