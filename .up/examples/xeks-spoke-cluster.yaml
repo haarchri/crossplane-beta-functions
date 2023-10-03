@@ -1,0 +1,19 @@
+apiVersion: aws.caas.upbound.io/v1alpha1
+kind: XEKS
+metadata:
+  name: aws-spoke-01
+spec:
+  parameters:
+    id: aws-spoke-01
+    region: eu-central-1
+    version: "1.27"
+    iam:
+      roleArn: arn:aws:iam::609897127049:role/AWSReservedSSO_AdministratorAccess_d703c73ed340fde7
+    nodes:
+      count: 3
+      instanceType: t3.small
+    subnetIds:
+      - subnet-0b4477a8cca03b42d
+      - subnet-00d3060cc832e0fbf
+      - subnet-0661ee876a6ea7e8f
+      - subnet-025ebc7ed73b1cdb3

@@ -1,0 +1,9 @@
+apiVersion: aws.caas.upbound.io/v1alpha1
+kind: XServices
+metadata:
+  name: aws-spoke-01
+spec:
+  gitops:
+    url: https://github.com/upbound/caas-cluster-configuration
+  providerConfigRef: 
+    name: aws-spoke-01

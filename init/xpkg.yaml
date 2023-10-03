@@ -1,0 +1,8 @@
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: test
+spec:
+  package: test.gz
+  packagePullPolicy: Never

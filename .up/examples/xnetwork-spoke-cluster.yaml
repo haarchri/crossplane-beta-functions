@@ -1,0 +1,8 @@
+apiVersion: aws.caas.upbound.io/v1alpha1
+kind: XNetwork
+metadata:
+  name: aws-spoke-01
+spec:
+  parameters:
+    id: aws-spoke-01
+    region: eu-central-1

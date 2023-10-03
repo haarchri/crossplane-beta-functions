@@ -1,0 +1,38 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: xclusters.aws.caas.upbound.io
+spec:
+  writeConnectionSecretsToNamespace: upbound-system
+  compositeTypeRef:
+    apiVersion: aws.caas.upbound.io/v1alpha1
+    kind: XCluster
+  mode: Pipeline
+  pipeline:
+    - step: patch-and-transform
+      functionRef:
+        name: crossplane-contrib-function-patch-and-transform
+      input:
+        apiVersion: pt.fn.crossplane.io/v1beta1
+        kind: Resources
+        resources:
+          - name: compositeNetworkEKS
+            base:
+              apiVersion: aws.caas.upbound.io/v1alpha1
+              kind: XNetwork
+            patches:
+              - fromFieldPath: spec.parameters.id
+                toFieldPath: spec.parameters.id
+              - fromFieldPath: spec.parameters.region
+                toFieldPath: spec.parameters.region
+              - fromFieldPath: spec.parameters.deletionPolicy
+                toFieldPath: spec.parameters.deletionPolicy
+              - fromFieldPath: spec.parameters.providerConfigName
+                toFieldPath: spec.parameters.providerConfigName
+              - fromFieldPath: spec.parameters.networkSelector
+                toFieldPath: spec.compositionSelector.matchLabels[type]
+              - type: ToCompositeFieldPath
+                fromFieldPath: status.subnetIds
+                toFieldPath: status.subnetIds
+                policy:
+                  fromFieldPath: Required
